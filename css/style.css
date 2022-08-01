@@ -1,0 +1,346 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.info {
+  display: flex;
+  justify-content: space-between;
+  width: 1080px;
+  margin: 0px auto 20px;
+  border: 3px solid #af4a2a;
+  padding: 15px;
+  background-color: #e4b424;
+}
+.controls-button {
+  background-color: rgb(33 150 243 / 80%);
+  width: 100%;
+  position: fixed;
+  height: 100%;
+  z-index: 12;
+}
+.controls-button span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #af4a2a;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  border: 4px solid white;
+  border-radius: 7px;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+}
+.info .name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.info .score {
+  font-size: 20px;
+  font-weight: bold;
+}
+.info .tries {
+  font-size: 20px;
+  font-weight: bold;
+}
+.memory-game {
+  display: grid;
+  width: 1080px;
+  margin: 20px auto;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  justify-items: center;
+  background-color: #333;
+  row-gap: 10px;
+  padding: 10px;
+  column-gap: 10px;
+}
+.memory-game.no-clicking {
+  pointer-events: none;
+}
+.memory-game .game-block img {
+  width: 195px;
+  height: 195px;
+}
+.game-block {
+  position: relative;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+}
+.game-block .front {
+  width: 200px;
+  height: 200px;
+}
+.game-block .front::before {
+  content: "?";
+  position: absolute;
+  background-color: #777;
+  width: 195px;
+  height: 195px;
+  font-size: 149px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.game-block .back {
+  width: 200px;
+  height: 200px;
+  transform: rotateY(180deg);
+}
+.game-block .face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  backface-visibility: hidden;
+  text-align: center;
+  border: 3px solid #af4a2a;
+}
+.game-block.is-flipped,
+.game-block.has-matched {
+  transform: rotateY(180deg);
+  pointer-events: none;
+}
+
+.end-game {
+  width: 100%;
+  height: 930px;
+  position: absolute;
+  background-color: hwb(215deg 16% 15% / 70%);
+  z-index: 20;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.end-game .close {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1200px;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  color: black;
+  background-color: #af4a2a;
+  font-weight: bold;
+  padding: 20px;
+  border: 5px solid white;
+  border-radius: 10px;
+}
+.end-game .reset {
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 40px;
+  font-size: 20px;
+  padding: 5px;
+  font-weight: bold;
+  background-color: #e4b424;
+  cursor: pointer;
+}
+.leader {
+  width: 1000px;
+  height: 500px;
+  margin: 20px auto;
+}
+.leader-container {
+  width: revert;
+  margin: 20px auto;
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 25px;
+  font-weight: bold;
+  align-items: center;
+}
+@media (max-width: 1082px) {
+  .memory-game {
+    width: 690px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    row-gap: 0px;
+    column-gap: 20px;
+    height: 585px;
+  }
+  .memory-game .game-block img {
+    width: 130px;
+    height: 130px;
+  }
+  .game-block {
+    width: 130px;
+    height: 130px;
+  }
+  .game-block .face {
+    width: 130px;
+    height: 130px;
+  }
+  .game-block .front::before {
+    width: 125px;
+    height: 125px;
+  }
+  .game-block .face {
+    width: 130px;
+    height: 130px;
+  }
+  .info {
+    width: 690px;
+    margin: 0px auto 20px;
+  }
+  .end-game .close {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 660px;
+    transform: translate(-50%, -50%);
+    font-size: 19px;
+    color: black;
+    background-color: #af4a2a;
+    font-weight: bold;
+    padding: 20px;
+    border: 5px solid white;
+    border-radius: 10px;
+    height: 145px;
+  }
+  .end-game {
+    width: 100%;
+    height: 684px;
+    position: absolute;
+    background-color: hwb(215deg 16% 15% / 70%);
+    z-index: 20;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+}
+@media (max-width: 690px) {
+  .memory-game {
+    width: 400px;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    row-gap: 5px;
+    column-gap: 0px;
+    height: 312px;
+  }
+  .game-block {
+    width: 70px;
+    height: 70px;
+  }
+  .memory-game .game-block img {
+    width: 70px;
+    height: 70px;
+  }
+  .game-block .face {
+    width: 70px;
+    height: 70px;
+  }
+  .game-block .front::before {
+    width: 65px;
+    height: 65px;
+    font-size: 60px;
+  }
+  .game-block .face {
+    width: 70px;
+    height: 70px;
+  }
+  .info {
+    width: 400px;
+  }
+  .info .name {
+    font-size: 12px;
+  }
+  .info .score {
+    font-size: 12px;
+  }
+  .info .tries {
+    font-size: 12px;
+  }
+  .end-game .close {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 392px;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: black;
+    background-color: #af4a2a;
+    font-weight: bold;
+    padding: 20px;
+    border: 5px solid white;
+    border-radius: 10px;
+    height: 107px;
+  }
+  .end-game .reset {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 28px;
+    font-size: 14px;
+    padding: 5px;
+    font-weight: bold;
+    background-color: #e4b424;
+    cursor: pointer;
+  }
+  .end-game {
+    width: 100%;
+    height: 402px;
+    position: absolute;
+    background-color: hwb(215deg 16% 15% / 70%);
+    z-index: 20;
+    left: 0;
+    top: 0;
+    display: none;
+  }
+}
+@media (max-width: 400px) {
+  .memory-game {
+    width: 400px;
+    grid-template-columns: repeat(auto-fill, minmax(75px, 1fr));
+    row-gap: 5px;
+    column-gap: 0px;
+    height: 312px;
+  }
+  .game-block {
+    width: 70px;
+    height: 70px;
+  }
+  .game-block .face {
+    width: 70px;
+    height: 70px;
+  }
+  .memory-game .game-block img {
+    width: 70px;
+    height: 70px;
+  }
+  .game-block .front::before {
+    width: 65px;
+    height: 65px;
+    font-size: 60px;
+  }
+  .game-block .face {
+    width: 70px;
+    height: 70px;
+  }
+  .info {
+    width: 400px;
+  }
+  .info .name {
+    font-size: 12px;
+  }
+  .info .score {
+    font-size: 12px;
+  }
+  .info .tries {
+    font-size: 12px;
+  }
+}
